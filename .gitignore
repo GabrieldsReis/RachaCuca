@@ -1,0 +1,8 @@
+# Executáveis e arquivos de compilação
+/racha_cuca
+*.o
+*.out
+/build/
+
+# Configurações locais do VS Code
+.vscode/
