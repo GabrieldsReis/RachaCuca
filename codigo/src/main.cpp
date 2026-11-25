@@ -115,11 +115,38 @@ int main() {
 
     pecas.clear();
 
-    // Exibe as três peças e deixa o quarto espaço vazio.
+    vector<int> tabuleiro(N*N); //preciso criar a logica da mudanca de posicoes
+//o usarei como indice para o desenho
+for(int i=0;i<(N*N-1);i++){
+ tabuleiro[i]= i;
+}
+tabuleiro[N*N-1] = -1;
+
     float tamanhoCedula = ((float)tamanhoJanela - 2 * 32) / N;
 
-    while (!WindowShouldClose()) {
 
+
+
+    while (!WindowShouldClose()) {
+        
+if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+Vector2 posicao = GetMousePosition();
+    if(!posicao.x >= 32 &&
+posicao.x < 32 + N * tamanhoCedula &&
+posicao.y >= 32 &&
+posicao.y < 32 + N * tamanhoCedula
+    ){
+        continue;
+    }
+
+int coluna = (posicao.x-32)/tamanhoCedula;
+int linha = (posicao.y-32)/tamanhoCedula;
+int indice = linha*N+coluna;
+cout << "Linha: " << linha
+     << "\nColuna: " << coluna
+     << "\nIndice: " << indice << "\n";
+
+}
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
@@ -133,7 +160,7 @@ int main() {
 
                 // 2. Calcula a posição da peça no vetor
                 int indice = i * N + j;
-
+                int idPeca = tabuleiro[indice];
                 // 3. Define onde a peça será desenhada
                 Rectangle destino = {
                     X, Y,
@@ -142,7 +169,7 @@ int main() {
                 };
 
                 // 4. Verifica se é a última célula (espaço vazio)
-                if (i == linhas - 1 && j == colunas - 1) {
+                if (idPeca==-1) {
 
                     DrawRectangleRec(destino, LIGHTGRAY);
                     DrawRectangleLinesEx(destino,1.0f,GRAY);
@@ -153,15 +180,15 @@ int main() {
                     // 5. Define qual parte da textura será utilizada
                     Rectangle origem = {
                         0, 0,
-                        (float)Texturas[indice].width,
-                        (float)Texturas[indice].height
+                        (float)Texturas[idPeca].width,
+                        (float)Texturas[idPeca].height
                     };
 
                     Vector2 pontoOrigem = {0, 0};
 
                     // 6. Desenha a peça
                     DrawTexturePro(
-                        Texturas[indice],
+                        Texturas[idPeca],
                         origem,
                         destino,
                         pontoOrigem,
@@ -180,7 +207,6 @@ int main() {
     for (Texture2D &textura : Texturas) {
         UnloadTexture(textura);
     }
-
 
         CloseWindow();
 
