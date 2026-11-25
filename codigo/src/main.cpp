@@ -179,8 +179,8 @@ swap(tabuleiro[indiceVazio],tabuleiro[indiceVizinho]);
 
 
 
-
-    while (!WindowShouldClose()) {
+bool venceu = false;
+    while (!WindowShouldClose() && !venceu) {
        
         
         
@@ -217,6 +217,19 @@ bool movimentoValido = Adjacentes(indice, indiceVazio, N);
 
 if (movimentoValido) {
     swap(tabuleiro[indice], tabuleiro[indiceVazio]);
+    venceu=true;
+    
+    for(int i=0;i<N*N-1;i++){
+    if(!(tabuleiro[i] == i)){ 
+venceu = false;
+break;
+
+    }
+if(tabuleiro[N*N-1]!=-1){
+    venceu=false;
+}
+}
+
 }
 
 
@@ -286,8 +299,9 @@ if (movimentoValido) {
     for (Texture2D &textura : Texturas) {
         UnloadTexture(textura);
     }
-
-        CloseWindow();
+if (venceu) {
+    cout << "Parabéns! Você resolveu o Racha Cuca!";
+}        CloseWindow();
 
     return 0;
 }
