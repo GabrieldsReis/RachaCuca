@@ -2,6 +2,8 @@
 #include <raylib.h>
 #include <vector>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -153,9 +155,34 @@ tabuleiro[N*N-1] = -1;
 
     float tamanhoCedula = ((float)tamanhoJanela - 2 * 32) / N;
 
+vector<int>VizinhosValidos;
+srand(time(nullptr));
+for(int j=0;j<100;j++){
+VizinhosValidos.clear();
+
+int indiceVazio = procura_i(tabuleiro, N); //aonde esta a posicao vazio
+
+for(int i=0;i<N*N;i++){
+    if(Adjacentes(i,indiceVazio,N)){
+        VizinhosValidos.push_back(i);
+    }
+    
+}
+if (VizinhosValidos.empty()) {
+    break;
+}
+
+int sorteio = rand() % VizinhosValidos.size();
+int indiceVizinho = VizinhosValidos[sorteio];
+swap(tabuleiro[indiceVazio],tabuleiro[indiceVizinho]);
+}
+
+
 
 
     while (!WindowShouldClose()) {
+       
+        
         
 
 if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
