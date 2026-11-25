@@ -5,6 +5,35 @@
 
 using namespace std;
 
+
+bool Adjacentes(int indiceA, int indiceB, int N){
+int linhaA = indiceA / N;//pos x 
+int colunaA = indiceA % N; //pos y
+
+int linhaB = indiceB / N;
+int colunaB = indiceB % N;
+
+bool horizontal = linhaA == linhaB &&
+                  (colunaA == colunaB - 1 || colunaA == colunaB + 1);
+
+bool vertical = colunaA == colunaB &&
+                (linhaA == linhaB - 1 || linhaA == linhaB + 1);
+
+                return horizontal || vertical;
+
+}
+
+
+int procura_i(const vector<int>& tabuleiro,int N){
+    for(int i=0;i<N*N;i++){
+    if(tabuleiro[i]==-1){
+        return i;
+    }
+    
+}return -1;
+}
+
+
 int main() {
 
     Image Imagem_original = LoadImage("codigo/assets/imagem_teste.png");
@@ -126,27 +155,50 @@ tabuleiro[N*N-1] = -1;
 
 
 
-
     while (!WindowShouldClose()) {
         
+
 if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
 Vector2 posicao = GetMousePosition();
-    if(!posicao.x >= 32 &&
+
+
+    if(!(posicao.x >= 32 &&
 posicao.x < 32 + N * tamanhoCedula &&
 posicao.y >= 32 &&
-posicao.y < 32 + N * tamanhoCedula
+posicao.y < 32 + N * tamanhoCedula)
     ){
         continue;
     }
 
 int coluna = (posicao.x-32)/tamanhoCedula;
 int linha = (posicao.y-32)/tamanhoCedula;
-int indice = linha*N+coluna;
+int indice = linha*N+coluna; //aonde foi o click
+
+int indiceVazio = procura_i(tabuleiro, N); //aonde esta a posicao vazio
+
+
 cout << "Linha: " << linha
      << "\nColuna: " << coluna
-     << "\nIndice: " << indice << "\n";
+     << "\nIndice: " << indice << "\n"
+     << "\nIndice Vazio: " << indiceVazio;
 
+
+
+if(indiceVazio!= -1){
+bool movimentoValido = Adjacentes(indice, indiceVazio, N);
+
+
+if (movimentoValido) {
+    swap(tabuleiro[indice], tabuleiro[indiceVazio]);
 }
+
+
+
+
+}}
+
+
+
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
