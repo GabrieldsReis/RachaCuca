@@ -1,4 +1,36 @@
-# Racha Cuca
+
+## Estado atual do desenvolvimento
+
+**Progresso geral estimado: 50%.**
+
+As funcionalidades centrais do simulador estão aproximadamente 83% concluídas (5 de 6 marcos de desenvolvimento). A estimativa geral também considera testes, documentação e preparação da entrega.
+
+### Implementado
+
+- Carregamento e validação da imagem.
+- Entrada de N, aceitando valores de 2 a 6.
+- Divisão da imagem em N × N regiões.
+- Cálculo dos recortes para imagens cujas dimensões não são divisíveis igualmente por N.
+- Retirada da região inferior direita.
+- Conversão das peças em texturas da Raylib.
+- Representação lógica do tabuleiro utilizando vector<int>, com -1 para o espaço vazio.
+- Exibição gráfica do tabuleiro.
+- Identificação das coordenadas dos cliques.
+- Validação da adjacência entre peças e espaço vazio.
+- Movimentação de peças por cliques.
+- Embaralhamento com 100 movimentos válidos.
+- Detecção da configuração final e mensagem de vitória.
+- Liberação das texturas e encerramento da janela.
+
+### Pendente
+
+- Registrar os movimentos realizados durante o embaralhamento.
+- Apresentar a solução passo a passo, permitindo acompanhar a reconstrução da imagem.
+- Completar os testes exigidos pelo enunciado.
+- Finalizar a documentação de instalação e execução.
+- Preparar o relatório em PDF.
+- Organizar e testar o pacote ZIP de entrega.
+- Preparar a apresentação do projeto.# Racha Cuca
 
 **Um quebra-cabeça deslizante desenvolvido em C++ com Raylib.**
 
